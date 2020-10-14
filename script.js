@@ -1,8 +1,34 @@
-//pool.js ...........................................................
+//all the code are studied from: https://codepen.io/jeffibacache/pen/bzBsp
+
+
+//some common vars that will be use later:
+
+var canvas;
+var context;
+var screenWidth;
+var screenHeight;
+var doublePI = Math.PI * 2;
+
+//game vars
+
+var ship;
+
+var particlePool;
+var particles;
+
+var bulletPool;
+var bullets;
+
+var asteroidPool;
+var asteroids;
+
+var hScan;
+var asteroidVelFactor = 0;
+
 
 var Pool = (function()
 {
-	//exposed methods:
+	//these code is to exposing the elements:
 
 	var create = function(type, size)
 	{
@@ -12,7 +38,7 @@ var Pool = (function()
 		return obj;
 	};
 
-	//Ship definition:
+	//here are all the element's shapes
 
 	var def =
 	{
@@ -53,7 +79,7 @@ var Pool = (function()
 	return {create:create};
 }());
 
-//vec2d.js ...........................................................
+//2d effect of the target:
 
 var Vec2D = (function()
 {
@@ -71,7 +97,7 @@ var Vec2D = (function()
 
 	var def =
 	{
-		_x: 1,
+		_x: 1,//here is to define the location of the element;
 		_y: 0,
 
 		getX: function()
@@ -152,7 +178,6 @@ var Vec2D = (function()
 	return {create:create};
 }());
 
-//particle.js ...........................................................
 
 var Particle = (function()
 {
@@ -258,7 +283,7 @@ var Asteroid = (function()
 	var create = function()
 	{
 		var obj = Object.create(def);
-		obj.radius = 40;
+		obj.radius = 50;
 		obj.color = '#9B59B6';
 		obj.pos = Vec2D.create(0, 0);
 		obj.vel = Vec2D.create(0, 0);
@@ -300,7 +325,7 @@ var Asteroid = (function()
 	return {create:create};
 }());
 
-//ship.js ...........................................................
+//here is the code for the ship ...........................................................
 
 var Ship = (function()
 {
@@ -369,30 +394,6 @@ var Ship = (function()
 }());
 
 //canvas-asteroids.js ...........................................................
-
-//common vars
-
-var canvas;
-var context;
-var screenWidth;
-var screenHeight;
-var doublePI = Math.PI * 2;
-
-//game vars
-
-var ship;
-
-var particlePool;
-var particles;
-
-var bulletPool;
-var bullets;
-
-var asteroidPool;
-var asteroids;
-
-var hScan;
-var asteroidVelFactor = 0;
 
 //keyboard vars
 
